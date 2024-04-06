@@ -45,7 +45,7 @@ public class EmpleadoController {
     @PostMapping("/empleados")
     ResponseEntity<EMPLEADO> create(@RequestBody EMPLEADO newEmpleado) throws URISyntaxException {
         EMPLEADO res = empleadoRepository.save(newEmpleado);
-        return ResponseEntity.created(new URI("/empleadosv2/" + res.getId())).body(res);
+        return ResponseEntity.created(new URI("/empleados/" + res.getId())).body(res);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
