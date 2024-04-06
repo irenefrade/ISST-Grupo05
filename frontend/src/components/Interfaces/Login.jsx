@@ -2,7 +2,7 @@ import React, {useEffect } from 'react';
 import { MDBContainer, MDBInput, MDBRow, MDBCol, MDBCard, MDBCardBody } from 'mdb-react-ui-kit';
 import { useState, useContext } from 'react';
 import { LoginContext } from '../../App';
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 
 const Login = (props) => {
@@ -54,18 +54,21 @@ const Login = (props) => {
         <MDBRow className='d-flex justify-content-center align-items-center h-100'>
           <MDBCol col='12'>
 
-            <MDBCard className='bg-white my-5 mx-auto justify-content-center'>
+            <MDBCard className='bg-white my-5 mx-auto justify-content-center shadow-lg'>
               <MDBCardBody className='p-5 w-100 d-flex flex-column'>
 
-                <h2 className="fw-bold mb-2 text-center">Inicia sesión</h2>
+                <h2 className="fw-bold mb-2 text-center">Inicia sesión como empleado</h2>
                 <br></br>
                 <form style={{display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center" }}>
-                <MDBInput wrapperClass='mb-4 w-100' placeholder='Correo' id='formControl' value={username} onChange={(event) => setUsername(event.target.value)} type='email' size="lg" />
-                <MDBInput wrapperClass='mb-4 w-100' placeholder='Contraseña' id='formControlDefault' value={cont} type='password' onChange={(event) => setCont(event.target.value)} size="lg" />
+                <MDBInput wrapperClass='rounded shadow mb-3 w-100' placeholder='Correo' id='formControl' value={username} onChange={(event) => setUsername(event.target.value)} type='email' size="lg" />
+                <MDBInput wrapperClass='rounded shadow mb-4 w-100' placeholder='Contraseña' id='formControlDefault' value={cont} type='password' onChange={(event) => setCont(event.target.value)} size="lg" />
 
-                <button type="submit" className="btn btn-primary" onClick={handleSubmit}> Iniciar sesión </button>
+                <button type="submit" className="btn btn-primary shadow" onClick={handleSubmit}> Iniciar sesión </button>
+                
+                
                 </form>
                 <hr className="my-4" />
+                <h6 style={{ textAlign: "center" }}>¿Eres una empresa? pincha <Link to="/loginempresa">aquí</Link></h6>
 
                 {error && <div style={{ textAlign: "center" }}>{error}</div>}
 
