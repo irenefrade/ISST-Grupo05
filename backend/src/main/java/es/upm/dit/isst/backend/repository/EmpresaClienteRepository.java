@@ -1,9 +1,11 @@
 package es.upm.dit.isst.backend.repository;
 
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 
 import es.upm.dit.isst.backend.model.*;
 
-public interface HorariosRepository extends CrudRepository<HORARIOS, Long> {
-     
+public interface EmpresaClienteRepository extends CrudRepository<EMPRESACLIENTE, Long>{
+    
 }

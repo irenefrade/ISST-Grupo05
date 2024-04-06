@@ -5,6 +5,7 @@ import java.util.List;
 
 import jakarta.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -22,6 +23,10 @@ public class EMPLEADO {
     @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<HORARIOS> horarios;
+    @ManyToOne
+    @JoinColumn(name = "empresa_id")
+    @JsonBackReference
+    private EMPRESACLIENTE empresa;
    
 
     // Constructor vacío
@@ -29,7 +34,7 @@ public class EMPLEADO {
     }
 
     // Constructor con todos los campos
-    public EMPLEADO(Long id, String nombreCompleto, String numeroTelefono, String correoElectronico, String password, String departamento, String puesto, Boolean EsControlador) {
+    public EMPLEADO(Long id, String nombreCompleto, String numeroTelefono, String correoElectronico, String password, String departamento, String puesto, Boolean EsControlador, EMPRESACLIENTE empresa) {
         this.id = id;
         this.nombreCompleto = nombreCompleto;
         this.numeroTelefono = numeroTelefono;
@@ -38,6 +43,7 @@ public class EMPLEADO {
         this.departamento = departamento;
         this.puesto = puesto;
         this.EsControlador = EsControlador; 
+        this.empresa = empresa;
     }
 
     public Long getId() {
@@ -114,5 +120,11 @@ public class EMPLEADO {
         this.horarios = horarios;
     }
 
+    public EMPRESACLIENTE getEmpleados() {
+        return this.empresa;
+    }
 
+    public void setEmpresa(EMPRESACLIENTE empresa) {
+        this.empresa = empresa;
+    }
 }
