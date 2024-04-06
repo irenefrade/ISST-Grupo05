@@ -14,9 +14,9 @@ public class EMPRESACLIENTE {
     private String nombreEmpresa;
     private Boolean estaSuscrito;
     private String password;
-    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<EMPLEADO> empleados;
+    //@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
+    //@JsonManagedReference
+    //private List<EMPLEADO> empleados;
 
     // Constructor vacío
     public EMPRESACLIENTE() {
@@ -63,11 +63,5 @@ public class EMPRESACLIENTE {
         this.password = password;
     }
 
-    public List<EMPLEADO> getEmpleados() {
-        return empleados;
-    }
-
-    public void setEmpleados(List<EMPLEADO> empleados) {
-        this.empleados = empleados;
-    }
+   
 }

@@ -20,13 +20,15 @@ public class EMPLEADO {
     private String departamento;
     private String puesto;
     private Boolean EsControlador;
+    private Long empresa_id;
+    
     @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<HORARIOS> horarios;
-    @ManyToOne
-    @JoinColumn(name = "empresa_id")
-    @JsonBackReference
-    private EMPRESACLIENTE empresa;
+    //@ManyToOne
+    //@JoinColumn(name = "empresa_id")
+    //@JsonBackReference
+    //private EMPRESACLIENTE empresa;
    
 
     // Constructor vacío
@@ -34,7 +36,7 @@ public class EMPLEADO {
     }
 
     // Constructor con todos los campos
-    public EMPLEADO(Long id, String nombreCompleto, String numeroTelefono, String correoElectronico, String password, String departamento, String puesto, Boolean EsControlador, EMPRESACLIENTE empresa) {
+    public EMPLEADO(Long id, String nombreCompleto, String numeroTelefono, String correoElectronico, String password, String departamento, String puesto, Boolean EsControlador, Long empresa_id) {
         this.id = id;
         this.nombreCompleto = nombreCompleto;
         this.numeroTelefono = numeroTelefono;
@@ -43,7 +45,7 @@ public class EMPLEADO {
         this.departamento = departamento;
         this.puesto = puesto;
         this.EsControlador = EsControlador; 
-        this.empresa = empresa;
+        this.empresa_id = empresa_id;
     }
 
     public Long getId() {
@@ -120,11 +122,12 @@ public class EMPLEADO {
         this.horarios = horarios;
     }
 
-    public EMPRESACLIENTE getEmpleados() {
-        return this.empresa;
+    public Long getEmpresa_id() {
+        return empresa_id;
     }
 
-    public void setEmpresa(EMPRESACLIENTE empresa) {
-        this.empresa = empresa;
+    public void setEmpresa_id(Long empresa_id) {
+        this.empresa_id = empresa_id;
     }
+
 }

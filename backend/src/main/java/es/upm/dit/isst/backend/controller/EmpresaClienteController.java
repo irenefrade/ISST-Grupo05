@@ -68,34 +68,5 @@ public class EmpresaClienteController {
     }).orElse(ResponseEntity.notFound().build());
 }
 
-    @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/empresas/{empresaId}/empleados")
-    public List<EMPLEADO> obtenerHorariosDeEmpleado(@PathVariable Long empresaId) {
-        EMPRESACLIENTE empresa = empresaClienteRepository.findById(empresaId).get();
-        return empresa.getEmpleados();
-    }
-
-
-    @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/empresas/{empresaId}/empleados")
-    public ResponseEntity<EMPLEADO> create(@RequestBody EMPLEADO newEmpleados, @PathVariable Long empresaId) {
-        EMPRESACLIENTE empresa = empresaClienteRepository.findById(empresaId).get();
-    
-        // Agregar el nuevo horario al empleado
-        newEmpleados.setEmpresa(empresa);
-        empresa.getEmpleados().add(newEmpleados);
-    
-        // Guardar el empleado actualizado en la base de datos
-        empresaClienteRepository.save(empresa);
-    
-        return ResponseEntity.ok(newEmpleados);
-    }
-
-
-    @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/empresas/{empresaId}/editarEmpresa")
-    public List<EMPLEADO> obtenerDatosDeEmpleado(@PathVariable Long empresaId) {
-        EMPRESACLIENTE empresa = empresaClienteRepository.findById(empresaId).get();
-        return empresa.getEmpleados();
-    }
+  
 }

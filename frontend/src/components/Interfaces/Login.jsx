@@ -39,7 +39,8 @@ const Login = (props) => {
       window.location.href = "/home"
     } else {
       // Si la autenticación falla, mostrar un mensaje de error
-      setError('Usuario o contraseña incorrectos');
+     
+      setError('Credenciales incorrectas');
     }
     
   };
