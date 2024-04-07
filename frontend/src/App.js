@@ -1,5 +1,5 @@
 import React, { useEffect, useState, createContext } from 'react';
-import { Route, Routes, Redirect} from 'react-router-dom';
+import { Route, Routes, Redirect, useParams} from 'react-router-dom';
 import './App.css';
 import PrivateRoute from './PrivateRoute'
 import Horarios from './components/Horarios/Horarios';
@@ -36,12 +36,8 @@ function App() {
         const fetchData = async () => {
           
           const responseEmpleados2 = await fetch('http://localhost:8080/empleados');
-          
           const empleados2Data = await responseEmpleados2.json();
-         
-
           setEmpleados2(empleados2Data);
-        
    
         };
         fetchData();
@@ -54,6 +50,8 @@ function App() {
         }, 1);
         return () => clearTimeout(timeoutId);
       }, []);
+
+      
 
      
 
@@ -75,10 +73,10 @@ function App() {
                         <Route path="/" element={<Login empleados2={empleados2} />}></Route>
                         <Route path="/loginempresa" element={<LoginEmpresa empleados2={empleados2} />}></Route>
                         <Route element={<PrivateRoute />}>
-                            <Route path="/home" element={<Home empleados2={empleados2}/>}></Route>
+                            <Route path="/home/:id" element={<Home empleados2={empleados2}/>}></Route>
                             <Route path="/homeempresa" element={<HomeEmpresa empleados2={empleados2}/>}></Route>
-                            <Route path="/horarios" element={<Horarios empleados={empleados2}/>} />
-                            <Route path="/horarios/:idHorario" element={<HorariosEmpleados empleados2={empleados2}/>} />
+                            <Route path="/horarios/:id" element={<Horarios empleados={empleados2}/>} />
+                            <Route path="/horarios" element={<HorariosEmpleados empleados2={empleados2}/>} />
                             
                         </Route>
                     </Routes>
