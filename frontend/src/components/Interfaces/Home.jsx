@@ -12,17 +12,6 @@ const Home = (props) => {
 
     const [userLogged, setUserLogged] = useContext(LoginContext);
     const { id } = useParams();
-
-   
-   
-
-    /*try {
-        nombreCompleto = userLogged && JSON.parse(userLogged).nombreCompleto; 
-        
-
-    } catch (error) {
-        console.log(`Error parsing JSON: ${error}`);
-      }*/
     
 
     const handleHorarios = () => {

@@ -4,92 +4,84 @@ import Liner from '../Interfaces/Liner';
 import { Link, useNavigate, Navigate, useParams } from 'react-router-dom';
 import { LoginContext } from '../../App';
 import { useEffect, useState, useContext } from "react";
-import HorariosEmpleados from "./HorariosEmpleados";
+import DatePicker from "react-datepicker";
+import { MDBContainer, MDBInput, MDBRow, MDBCol, MDBCard, MDBCardBody } from 'mdb-react-ui-kit';
+
 
 
 const Horarios = (props) => {
     const navigate = useNavigate();
-    const trabajadorList = props.empleados2;
     const { id } = useParams();
-    const horarios = trabajadorList[id-1].horarios;
+    const trabajadorList = props.empleados2;
+    const esControlador = trabajadorList[id-1].esControlador;
+    const [horariosList, setHorariosList] = useState(null);
 
-    const [filtro, setFiltro] = useState("");
-    const [userLogged, setUserLogged] = useContext(LoginContext);
-
-    let rec;
-    
-
-
-    
-
-
-     // Función para actualizar el filtro
-     const handleFilterChange = (event) => {
-        setFiltro(event.target.value);
-    };
-
-    //Función de filtrado  v2
-    const filteredEmpleados = trabajadorList.filter((item) =>
-        item.nombreCompleto.toLowerCase().includes(filtro.toLowerCase()) || item.correoElectronico.toLowerCase().includes(filtro.toLowerCase()) 
-    );
-
-    
     useEffect(() =>{
-        console.log(rec)
-      }, [rec]);
+        console.log(esControlador)
+    }, [esControlador]);
 
+    const empleadosEmpresa = trabajadorList.filter((trabajador) => trabajador.nombreEmpresa === trabajadorList[id-1].nombreEmpresa && trabajador.esControlador === false);
+
+        
+
+
+    
 
     return (
-        <div class="contenedor-flexbox" style={{display:"flex", flexDirection:"column", justifyContent: "center", alignContent:"center", margin:"auto"}}>
-            {rec
-            ?
-            <div class="contenedor-flexbox" style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center", margin: "auto"}}>
-                <Col>
-                    <Row>
-                        <Liner />
-                    </Row>
-                    <Col md>
-                    <Row>
-                        <h2 style={{justifyContent: "center", alignContent: "center", display: "flex"}}>Horarios de empleados</h2>
+        <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", margin: "2vh"}}>
+            <button className="btn btn-primary" onClick={() => navigate(`/home/${id}`)} style={{margin: "auto"}} >Volver</button>
+
+            {esControlador ? (
+                <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", margin: "auto"}}>
                     
-                        <div className="funciones" style={{justifyContent: "center", alignContent: "center", display: "flex", margin: 2}}>
-                            <input  type="text" id="filtro" placeholder="Filtrar por nombre o correo" value={filtro} onChange={handleFilterChange}
-                                style={{alignItems:'right', width: '30rem', marginBottom:"1vh"}}></input>
-                            <Link to={`/horarios/${id}`} style={{marginLeft: "1vw"}}>
-                                <button className="btn btn-primary" style={{marginBottom:"1vh"}}>Ver mis Horarios</button>
-                            </Link>
-                        </div>
-                    </Row>
-                    </Col>   
-                    <Row>
-                        <div id="productosresultados" style={{ height: "62vh", overflowY: "auto", overflowX: "hidden" }}>
-                            {filteredEmpleados.slice().reverse().map((empleadosItem) => (
-                                <Row className="my-2">
-                                <Card className="flex-fill">
-                                    <Card.Body> 
-                                        <div class="row">  
-                                            <div class="col-11" style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center", margin: "auto"}}> 
-                                            { <h2>{empleadosItem.nombreCompleto}</h2> }
-                                            </div>
-                                            <div class="col-1">
-                                            <Link to={`/horarios/${empleadosItem.id}`}>
-                                                <button className="btn btn-primary" style={{marginBottom:"1vh"}}>Ver horario</button>
-                                            </Link>
-                                            </div>
-                                        </div>
-                                    </Card.Body>
-                                </Card>
-                                
-                                </Row>                     
+                    <h1>Bienvenido, controlador</h1>
+                    <MDBCard className='my-5 mx-auto justify-content-center shadow-lg' style={{ backgroundColor: '#d3d3d3' }}>
+                    <MDBCardBody>
+                        <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "space-around" }}>
+                        {empleadosEmpresa.map((empleado, indexEmpleado) => (
+                        <div key={indexEmpleado}>
+                            <h2>Nombre del empleado: {empleado.nombreCompleto}</h2>
+                            {empleado.horarios.map((horario, indexHorario) => (
+                                <div key={indexHorario}>
+                                    <p> Fecha: {horario.fecha}</p>
+                                    <p> Hora de entrada: {horario.horaEntrada}</p>
+                                    <p> Hora de salida: {horario.horaSalida}</p>
+                                    <p> Tiempo de descanso: {horario.minutosPau} minutos</p>
+                                    <p> Horas trabajadas: {horario.minutosTot / 60} horas</p>
+                                </div>
                             ))}
-                        </div>     
-                    </Row>
-                </Col>
-            </div>
-            :
-            <Navigate to={`/horarios/${id}`}/>
-            }
-        </div>)
+                        </div>
+                        ))}
+                        </div>
+                    </MDBCardBody>
+                    </MDBCard>
+
+                </div>
+            ) : (
+                <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", margin: "auto"}}>
+                    
+                    <h1>Buenas, {trabajadorList[id-1].nombreCompleto}. Estos son tus horarios</h1>
+                    <MDBCard className='my-5 mx-auto justify-content-center shadow-lg' style={{ backgroundColor: '#d3d3d3' }}>
+                    <MDBCardBody>
+                        <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "space-around" }}>
+                            {trabajadorList[id - 1].horarios.map((horario, index) => (
+                                <div key={index}>
+                                    <p> Fecha: {horario.fecha}</p>
+                                    <p> Hora de entrada: {horario.horaEntrada}</p>
+                                    <p> Hora de salida: {horario.horaSalida}</p>
+                                    <p> Tiempo de descanso: {horario.minutosPau} minutos</p>
+                                    <p> Horas trabajadas: {horario.minutosTot / 60} horas</p>
+                                </div>
+                            ))}
+                        </div>
+                    </MDBCardBody>
+                    </MDBCard>
+                    
+                </div>
+            )}
+        </div>
+    );
 }
+
 
 export default Horarios;

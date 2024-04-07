@@ -44,7 +44,7 @@ const Login = (props) => {
 
   return (
     <div style={{
-      backgroundImage: `url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTE_OJmlLhfNgStY2-cOPkv2RiQdsaFR3dn16VDkiPpw&s')`,
+      backgroundImage: `url('https://preview.redd.it/6a2ce9ivarl51.jpg?width=1080&crop=smart&auto=webp&s=da1384cfbbfdebc57c2bd4d99080fd7428e08ff7')`,
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',
