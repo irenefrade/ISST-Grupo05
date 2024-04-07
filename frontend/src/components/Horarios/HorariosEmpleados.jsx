@@ -1,10 +1,11 @@
 import React from 'react';
 import {useContext, useEffect, useState} from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams,Link } from 'react-router-dom';
 import Liner from "../Interfaces/Liner";
 import Card from 'react-bootstrap/Card';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import logo from './../../assets/Frame 1.svg';
 import './Horarios.css';
 import { LoginContext } from '../../App';
 import { Container, Col, Row, Button } from "react-bootstrap";
@@ -218,7 +219,9 @@ const HorariosEmpleados = (props) => {
         <Row>
             <Liner/>
         </Row>
+        
         <Row style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center", margin: "auto"}}>
+       
             <div className="funciones" style={{justifyContent: "center", alignContent: "center", display: "flex", margin: 2}}>      
                 <h2><b>{empleado.nombreCompleto}</b></h2> 
                 {rec && <button className="btn btn-primary btn-block" style= {{marginLeft:"1vw"}} onClick={() => setShowPopup(true)}>Añadir horarios</button>}

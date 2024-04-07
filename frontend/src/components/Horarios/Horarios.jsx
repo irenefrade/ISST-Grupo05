@@ -75,7 +75,7 @@ const Horarios = (props) => {
                                     <Card.Body> 
                                         <div class="row">  
                                             <div class="col-11" style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center", margin: "auto"}}> 
-                                            { <h2>{empleadosItem.nombreCompleto} ⭐</h2> }
+                                            { <h2>{empleadosItem.nombreCompleto}</h2> }
                                             </div>
                                             <div class="col-1">
                                             <Link to={`/horarios/${empleadosItem.id}`}>
