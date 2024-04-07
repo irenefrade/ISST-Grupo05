@@ -1,35 +1,35 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { MDBContainer, MDBInput, MDBRow, MDBCol, MDBCard, MDBCardBody } from 'mdb-react-ui-kit';
 import { Link } from "react-router-dom";
-import { LoginContextEmpresa } from '../../App';
+import { LoginContext } from '../../App';
 
 const LoginEmpresa = (props) => {
-  const empresaList = props.empresas;
+  const trabajadorList = props.empleados2;
   const [username, setUsername] = useState('');
   const [cont, setCont] = useState('');
   const [error, setError] = useState('');
-  const [empresaLogged, setEmpresaLogged] = useContext(LoginContextEmpresa);
+  const [userLogged, setUserLogged] = useContext(LoginContext);
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    console.log(empresaLogged)
-  }, [empresaLogged]);
+    console.log(userLogged);
+  }, [userLogged]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const esUsuarioCorrecto = empresaList.find((empresaItem) => {
-      return empresaItem.nombreEmpresa === username && empresaItem.password === cont;
+    const esUsuarioCorrecto = trabajadorList.find((trabajadorItem) => {
+      return trabajadorItem.nombreEmpresa === username && trabajadorItem.passwordEmpresa === cont;
     });
 
-    const usuarioCorrecto = empresaList.find((empresaItem) => {
-      if (empresaItem.nombreEmpresa === username && empresaItem.password === cont) {
-        return empresaItem;
+    const usuarioCorrecto = trabajadorList.find((trabajadorItem) => {
+      if (trabajadorItem.nombreEmpresa === username && trabajadorItem.passwordEmpresa === cont) {
+        return trabajadorItem;
       }
     });
 
     if (esUsuarioCorrecto) {
-      setEmpresaLogged(JSON.stringify(usuarioCorrecto));
+      setUserLogged(JSON.stringify(usuarioCorrecto));
       window.location.href = "/homeempresa";
     } else {
       setError('Credenciales incorrectas');

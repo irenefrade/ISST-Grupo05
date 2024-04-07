@@ -59,7 +59,9 @@ public class EmpleadoController {
             empleado.setEsControlador(newEmpleado.getEsControlador());
             empleado.setDepartamento(newEmpleado.getDepartamento());
             empleado.setPuesto(newEmpleado.getPuesto());
-            empleado.setEmpresa_id(newEmpleado.getEmpresa_id());
+            empleado.setNombreEmpresa(newEmpleado.getNombreEmpresa());
+            empleado.setSuscripcionEmpresa(newEmpleado.getSuscripcionEmpresa());
+            empleado.setPasswordEmpresa(newEmpleado.getPasswordEmpresa());
             empleadoRepository.save(empleado);
             return ResponseEntity.ok().body(empleado);            
         }).orElse(new ResponseEntity<EMPLEADO>(HttpStatus.NOT_FOUND));

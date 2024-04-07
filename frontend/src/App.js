@@ -10,15 +10,15 @@ import Home from './components/Interfaces/Home';
 import HomeEmpresa from './components/Interfaces/HomeEmpresa';
 
 
-export const LoginContextEmpresa = createContext();
+
 export const LoginContext = createContext();
 
 
 function App() {
     const [empleados2, setEmpleados2] = useState([]);
-    const [empresas, setEmpresas] = useState([]);
+    //const [empresas, setEmpresas] = useState([]);
     const [userLogged, setUserLogged] = useState(null);
-    const [empresaLogged, setEmpresaLogged] = useState(null);
+
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -30,32 +30,18 @@ function App() {
         }
     }, []);
 
-    useEffect(() => {
-        localStorage.setItem('empresaLogged', empresaLogged);
-    }, [empresaLogged]);   
-    useEffect(() => {
-      const storedEmpresaLogged = localStorage.getItem('empresaLogged');
-      if (storedEmpresaLogged !== null) {
-          setEmpresaLogged(storedEmpresaLogged);
-      } else {
-        setEmpresaLogged(null)
-      }
-  }, []);
-
-  useEffect(() => {
-      localStorage.setItem('empresaLogged', empresaLogged);
-  }, [empresaLogged]);   
-
+    
+   
     useEffect(() => {
         const fetchData = async () => {
           
           const responseEmpleados2 = await fetch('http://localhost:8080/empleados');
-          const responseEmpresas = await fetch('http://localhost:8080/empresas');
+          
           const empleados2Data = await responseEmpleados2.json();
-          const empresasData = await responseEmpresas.json();
+         
 
           setEmpleados2(empleados2Data);
-          setEmpresas(empresasData);
+        
    
         };
         fetchData();
@@ -73,7 +59,7 @@ function App() {
 
     return (
         <LoginContext.Provider value={[userLogged, setUserLogged]}> 
-        <LoginContextEmpresa.Provider value={[empresaLogged, setEmpresaLogged]}> 
+     
             <div style={{
                 backgroundColor: '#FFFFFF',
                 backgroundRepeat: 'no-repeat',
@@ -87,10 +73,10 @@ function App() {
                     :
                       <Routes>
                         <Route path="/" element={<Login empleados2={empleados2} />}></Route>
-                        <Route path="/loginempresa" element={<LoginEmpresa empresas={empresas} />}></Route>
+                        <Route path="/loginempresa" element={<LoginEmpresa empleados2={empleados2} />}></Route>
                         <Route element={<PrivateRoute />}>
                             <Route path="/home" element={<Home empleados2={empleados2}/>}></Route>
-                            <Route path="/homeempresa" element={<HomeEmpresa empresas={empresas}/>}></Route>
+                            <Route path="/homeempresa" element={<HomeEmpresa empleados2={empleados2}/>}></Route>
                             <Route path="/horarios" element={<Horarios empleados={empleados2}/>} />
                             <Route path="/horarios/:idHorario" element={<HorariosEmpleados empleados2={empleados2}/>} />
                             
@@ -103,7 +89,7 @@ function App() {
                
                             
             </div>
-            </LoginContextEmpresa.Provider>
+        
         </LoginContext.Provider>
 
     );

@@ -20,7 +20,9 @@ public class EMPLEADO {
     private String departamento;
     private String puesto;
     private Boolean EsControlador;
-    private Long empresa_id;
+    private String nombreEmpresa;
+    private Boolean suscripcionEmpresa;
+    private String passwordEmpresa;
     
     @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL)
     @JsonManagedReference
@@ -36,18 +38,21 @@ public class EMPLEADO {
     }
 
     // Constructor con todos los campos
-    public EMPLEADO(Long id, String nombreCompleto, String numeroTelefono, String correoElectronico, String password, String departamento, String puesto, Boolean EsControlador, Long empresa_id) {
-        this.id = id;
-        this.nombreCompleto = nombreCompleto;
-        this.numeroTelefono = numeroTelefono;
-        this.correoElectronico = correoElectronico;
-        this.password = password;
-        this.departamento = departamento;
-        this.puesto = puesto;
-        this.EsControlador = EsControlador; 
-        this.empresa_id = empresa_id;
+    public EMPLEADO(Long id, String nombreCompleto, String numeroTelefono, String correoElectronico, String password,
+    String departamento, String puesto, Boolean esControlador, String nombreEmpresa,
+    Boolean suscripcionEmpresa, String passwordEmpresa) {
+    this.id = id;
+    this.nombreCompleto = nombreCompleto;
+    this.numeroTelefono = numeroTelefono;
+    this.correoElectronico = correoElectronico;
+    this.password = password;
+    this.departamento = departamento;
+    this.puesto = puesto;
+    this.EsControlador = esControlador;
+    this.nombreEmpresa = nombreEmpresa;
+    this.suscripcionEmpresa = suscripcionEmpresa;
+    this.passwordEmpresa = passwordEmpresa;
     }
-
     public Long getId() {
         return this.id;
     }
@@ -122,12 +127,30 @@ public class EMPLEADO {
         this.horarios = horarios;
     }
 
-    public Long getEmpresa_id() {
-        return empresa_id;
+    public String getNombreEmpresa() {
+        return nombreEmpresa;
     }
 
-    public void setEmpresa_id(Long empresa_id) {
-        this.empresa_id = empresa_id;
+    public void setNombreEmpresa(String nombreEmpresa) {
+        this.nombreEmpresa = nombreEmpresa;
     }
+
+    public Boolean getSuscripcionEmpresa() {
+        return suscripcionEmpresa;
+    }
+
+    public void setSuscripcionEmpresa(Boolean suscripcionEmpresa) {
+        this.suscripcionEmpresa = suscripcionEmpresa;
+    }
+
+    public String getPasswordEmpresa() {
+        return passwordEmpresa;
+    }
+
+    public void setPasswordEmpresa(String passwordEmpresa) {
+        this.passwordEmpresa = passwordEmpresa;
+    }
+
+   
 
 }

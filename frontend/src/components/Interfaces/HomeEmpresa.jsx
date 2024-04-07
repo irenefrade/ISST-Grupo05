@@ -1,30 +1,30 @@
 import React, {useContext, useEffect, useState} from 'react';
 import './../../App.css';
-import logo from './../../assets/Frame 1.svg';
-import { LoginContextEmpresa } from '../../App';
+import logo from './../../assets/logo.jpg';
+import { LoginContext } from '../../App';
 import { Link, Navigate  } from 'react-router-dom';
 
 const HomeEmpresa = (props) => {
-    const [empresaLogged, setEmpresaLogged] = useContext(LoginContextEmpresa);
+    const [userLogged, setUserLogged] = useContext(LoginContext);
     const [checkSubscription, setCheckSubscription] = useState(false)
 
     let nombreEmpresa;
-    let estaSuscrito;
+    //let estaSuscrito;
 
     try {
-        nombreEmpresa = empresaLogged && JSON.parse(empresaLogged).nombreEmpresa;
-        estaSuscrito = empresaLogged && JSON.parse(empresaLogged).estaSuscrito;
+        nombreEmpresa = userLogged && JSON.parse(userLogged).nombreEmpresa;
+        //estaSuscrito = empresaLogged && JSON.parse(empresaLogged).estaSuscrito;
     } catch (error) {
         console.log(`Error parsing JSON: ${error}`);
     }
 
     const logout = () => {
-        setEmpresaLogged()
+        setUserLogged()
     }
 
     useEffect(() =>{
-        console.log(empresaLogged)
-    }, [empresaLogged]);
+        console.log(userLogged)
+    }, [userLogged]);
 
     return (
 
@@ -32,13 +32,13 @@ const HomeEmpresa = (props) => {
             
             <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center", margin: "auto" }}>
                 <img className="logo" style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center", margin: "auto", width: "150px", height: "150px" }} src={logo}/>
-                <h1 style={{ textAlign: "center" }}>Bienvenida empresa, {nombreEmpresa}</h1>
+                <h1 style={{ textAlign: "center" }}>Bienvenida empresa,{nombreEmpresa}</h1>
                 <h6 style={{ textAlign: "center" }}>Salir <Link to="/" onClick={logout}>aquí</Link></h6> 
                 <button className='btn btn-primary' style={{ margin: "5vh" }} onClick={() => {setCheckSubscription(true)}}>Gestionar Suscripción</button>
                 {checkSubscription ?
                     <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center", margin: "auto" }}>
                         <h2 style={{ textAlign: "center" }}>Estado de la suscripción</h2>
-                        <h3 style={{ textAlign: "center", marginTop: "3vh" }}>{estaSuscrito ? "Estás suscrito" : "No estás suscrito"}</h3>
+                        <h3 style={{ textAlign: "center", marginTop: "3vh" }}></h3>
                         <button className='btn btn-danger' style={{margin: "4vh"}} onClick={() => {setCheckSubscription(false)}}>Cerrar</button>
                     </div>
                 : null
@@ -50,5 +50,5 @@ const HomeEmpresa = (props) => {
 
     )
 }
-
+//{estaSuscrito ? "Estás suscrito" : "No estás suscrito"}
 export default HomeEmpresa;
