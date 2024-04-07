@@ -1,32 +1,26 @@
 import { Container, Col, Row, Button, Form } from "react-bootstrap";
 import Card from 'react-bootstrap/Card';
 import Liner from '../Interfaces/Liner';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, useNavigate, Navigate, useParams } from 'react-router-dom';
 import { LoginContext } from '../../App';
 import { useEffect, useState, useContext } from "react";
 import HorariosEmpleados from "./HorariosEmpleados";
 
 
 const Horarios = (props) => {
+    const navigate = useNavigate();
+    const trabajadorList = props.empleados2;
+    const { id } = useParams();
+    const horarios = trabajadorList[id-1].horarios;
 
-    const empleadoList = props.empleados;
-
-        // Estado para almacenar el filtro actua
     const [filtro, setFiltro] = useState("");
     const [userLogged, setUserLogged] = useContext(LoginContext);
 
     let rec;
-    let id;
-    let horarios;
+    
 
 
-    try {
-        rec = userLogged && JSON.parse(userLogged).rec; 
-        id = userLogged && JSON.parse(userLogged).id; 
-        horarios = userLogged && JSON.parse(userLogged).horarios; 
-    } catch (error) {
-        console.log(`Error parsing JSON: ${error}`);
-      }
+    
 
 
      // Función para actualizar el filtro
@@ -35,7 +29,7 @@ const Horarios = (props) => {
     };
 
     //Función de filtrado  v2
-    const filteredEmpleados = empleadoList.filter((item) =>
+    const filteredEmpleados = trabajadorList.filter((item) =>
         item.nombreCompleto.toLowerCase().includes(filtro.toLowerCase()) || item.correoElectronico.toLowerCase().includes(filtro.toLowerCase()) 
     );
 
