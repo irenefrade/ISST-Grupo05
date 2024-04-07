@@ -1,10 +1,13 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { MDBContainer, MDBInput, MDBRow, MDBCol, MDBCard, MDBCardBody } from 'mdb-react-ui-kit';
 import { LoginContext } from '../../App';
 
+
 const Login = (props) => {
+  const navigate = useNavigate();
   const trabajadorList = props.empleados2;
+  
   const [username, setUsername] = useState('');
   const [cont, setCont] = useState('');
   const [error, setError] = useState('');
@@ -12,6 +15,8 @@ const Login = (props) => {
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
+    console.log("verás esto en el login");
+    console.log(trabajadorList);
     console.log(userLogged);
   }, [userLogged]);
 
@@ -24,13 +29,13 @@ const Login = (props) => {
 
     const usuarioCorrecto = trabajadorList.find((trabajadorItem) => {
       if (trabajadorItem.correoElectronico === username && trabajadorItem.password === cont) {
-        return trabajadorItem;
+        return trabajadorItem.id;
       }
     });
 
     if (esUsuarioCorrecto) {
       setUserLogged(JSON.stringify(usuarioCorrecto));
-      window.location.href = "/home";
+      navigate(`/home/${usuarioCorrecto.id}`);
     } else {
       setError('Credenciales incorrectas');
       setIsError(true);

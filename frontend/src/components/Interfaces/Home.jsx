@@ -2,26 +2,31 @@ import React, {useContext, useEffect, useState} from 'react';
 import './../../App.css';
 import logo from './../../assets/logo.jpg';
 import { LoginContext } from '../../App';
-import { Link, Navigate  } from 'react-router-dom';
+import { Link, Navigate, useNavigate, useParams  } from 'react-router-dom';
 import { MDBContainer, MDBInput, MDBRow, MDBCol, MDBCard, MDBCardBody } from 'mdb-react-ui-kit';
 
 const Home = (props) => {
-    const [userLogged, setUserLogged] = useContext(LoginContext);
+    const navigate = useNavigate();
 
-    let nombreCompleto;
+    const trabajadorList = props.empleados2;
+
+    const [userLogged, setUserLogged] = useContext(LoginContext);
+    const { id } = useParams();
+
+   
    
 
-    try {
+    /*try {
         nombreCompleto = userLogged && JSON.parse(userLogged).nombreCompleto; 
         
 
     } catch (error) {
         console.log(`Error parsing JSON: ${error}`);
-      }
+      }*/
     
 
     const handleHorarios = () => {
-        window.location.href = '/horarios';
+        navigate(`/horarios/${id}`);
     }
 
 
@@ -46,21 +51,24 @@ const Home = (props) => {
                 <img className="logo" style={{ width: "240px", height: "150px" }} src={logo}/>
                 <h6 style={{ textAlign: "center", marginTop: "50px" }}><Link to="/" onClick={logout}>Salir</Link></h6>
             </div>
-            <h1 style={{ textAlign: "center" }}>Perfil del {nombreCompleto}</h1>
+            <h1 style={{ textAlign: "center" }}>Perfil de {trabajadorList[id-1].nombreCompleto}</h1>
         
             <div style={{ display: "flex", flexDirection: "row", justifyContent: "flex-start", alignContent: "space-around", margin: "auto" }}>
-                <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "space-around", marginRight: "2vh" }}>
-                    
-                        <button className="btn btn-primary" style={{ height: "10vh", width: "20vw", marginBottom: "1vh", marginTop: "2vh" }} onClick={handleHorarios}>Control de horarios de empleados</button>
-                        
-                        <button className="btn btn-primary" style={{ height: "10vh", width: "20vw", marginBottom: "1vh", marginTop: "2vh" }} onClick={handleHorarios}>Registrar mi horario</button>
-                    
-                </div>
-                
+            <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "space-around", marginRight: "2vh" }}>
+                {trabajadorList[id-1].esControlador ? (
+                    <button className="btn btn-primary" style={{ height: "10vh", width: "20vw", marginBottom: "1vh", marginTop: "2vh" }} onClick={handleHorarios}>Control de horarios de empleados</button>
+                ) : (
+                    <button className="btn btn-primary" style={{ height: "10vh", width: "20vw", marginBottom: "1vh", marginTop: "2vh" }} onClick={handleHorarios}>Registrar mi horario</button>
+                )}
+            </div>
               <MDBCard  className='my-5 mx-auto justify-content-center shadow-lg' style={{ backgroundColor: '#d3d3d3' }}>
               <MDBCardBody>
                 <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "space-around" }}>
-                    <h6 style={{ textAlign: "left", width: "50vw", marginLeft: "10vh" }}>Nombre: {nombreCompleto}</h6>
+                    <h6 style={{ textAlign: "left", width: "50vw", marginLeft: "10vh" }}>Nombre: {trabajadorList[id-1].nombreCompleto} </h6>
+                    <h6 style={{ textAlign: "left", width: "50vw", marginLeft: "10vh" }}>
+                    Controlador: {trabajadorList[id-1].esControlador ? 'Sí' : 'No'}
+                    </h6>
+
                   
                 </div>
                 </MDBCardBody>
