@@ -23,7 +23,9 @@ public class EMPLEADO {
     private String nombreEmpresa;
     private Boolean suscripcionEmpresa;
     private String passwordEmpresa;
+    private Long empresaId;
     
+   
     @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<HORARIOS> horarios;
@@ -40,7 +42,7 @@ public class EMPLEADO {
     // Constructor con todos los campos
     public EMPLEADO(Long id, String nombreCompleto, String numeroTelefono, String correoElectronico, String password,
     String departamento, String puesto, Boolean esControlador, String nombreEmpresa,
-    Boolean suscripcionEmpresa, String passwordEmpresa) {
+    Boolean suscripcionEmpresa, String passwordEmpresa, Long empresaId) {
     this.id = id;
     this.nombreCompleto = nombreCompleto;
     this.numeroTelefono = numeroTelefono;
@@ -52,6 +54,7 @@ public class EMPLEADO {
     this.nombreEmpresa = nombreEmpresa;
     this.suscripcionEmpresa = suscripcionEmpresa;
     this.passwordEmpresa = passwordEmpresa;
+    this.empresaId = empresaId;
     }
     public Long getId() {
         return this.id;
@@ -150,6 +153,14 @@ public class EMPLEADO {
     public void setPasswordEmpresa(String passwordEmpresa) {
         this.passwordEmpresa = passwordEmpresa;
     }
+    public Long getEmpresaId() {
+        return empresaId;
+    }
+
+    public void setEmpresaId(Long empresaId) {
+        this.empresaId = empresaId;
+    }
+
 
    
 

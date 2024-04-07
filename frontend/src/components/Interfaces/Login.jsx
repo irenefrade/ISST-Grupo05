@@ -7,7 +7,6 @@ import { LoginContext } from '../../App';
 const Login = (props) => {
   const navigate = useNavigate();
   const trabajadorList = props.empleados2;
-  
   const [username, setUsername] = useState('');
   const [cont, setCont] = useState('');
   const [error, setError] = useState('');

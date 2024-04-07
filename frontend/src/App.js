@@ -74,8 +74,8 @@ function App() {
                         <Route path="/loginempresa" element={<LoginEmpresa empleados2={empleados2} />}></Route>
                         <Route element={<PrivateRoute />}>
                             <Route path="/home/:id" element={<Home empleados2={empleados2}/>}></Route>
-                            <Route path="/homeempresa" element={<HomeEmpresa empleados2={empleados2}/>}></Route>
-                            <Route path="/horarios/:id" element={<Horarios empleados={empleados2}/>} />
+                            <Route path="/homeempresa/:empresaId" element={<HomeEmpresa empleados2={empleados2}/>}></Route>
+                            <Route path="/horarios/:id" element={<Horarios empleados2={empleados2}/>} />
                             <Route path="/horarios" element={<HorariosEmpleados empleados2={empleados2}/>} />
                             
                         </Route>

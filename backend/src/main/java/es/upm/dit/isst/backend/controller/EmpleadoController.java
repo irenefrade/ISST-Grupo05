@@ -62,6 +62,7 @@ public class EmpleadoController {
             empleado.setNombreEmpresa(newEmpleado.getNombreEmpresa());
             empleado.setSuscripcionEmpresa(newEmpleado.getSuscripcionEmpresa());
             empleado.setPasswordEmpresa(newEmpleado.getPasswordEmpresa());
+            empleado.setEmpresaId(newEmpleado.getEmpresaId());
             empleadoRepository.save(empleado);
             return ResponseEntity.ok().body(empleado);            
         }).orElse(new ResponseEntity<EMPLEADO>(HttpStatus.NOT_FOUND));
