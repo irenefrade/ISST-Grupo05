@@ -10,9 +10,9 @@ import Home from './components/Interfaces/Home';
 import HomeEmpresa from './components/Interfaces/HomeEmpresa';
 
 
-
-export const LoginContext = createContext();
 export const LoginContextEmpresa = createContext();
+export const LoginContext = createContext();
+
 
 function App() {
     const [empleados2, setEmpleados2] = useState([]);
@@ -90,7 +90,7 @@ function App() {
                         <Route path="/loginempresa" element={<LoginEmpresa empresas={empresas} />}></Route>
                         <Route element={<PrivateRoute />}>
                             <Route path="/home" element={<Home empleados2={empleados2}/>}></Route>
-                            <Route path="/homeempresas" element={<HomeEmpresa empresas={empresas}/>}></Route>
+                            <Route path="/homeempresa" element={<HomeEmpresa empresas={empresas}/>}></Route>
                             <Route path="/horarios" element={<Horarios empleados={empleados2}/>} />
                             <Route path="/horarios/:idHorario" element={<HorariosEmpleados empleados2={empleados2}/>} />
                             
