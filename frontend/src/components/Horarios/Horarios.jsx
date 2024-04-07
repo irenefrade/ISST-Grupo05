@@ -28,58 +28,53 @@ const Horarios = (props) => {
     
 
     return (
+        <Container className="d-flex justify-content-center align-items-center">
         <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", margin: "2vh"}}>
             <button className="btn btn-primary" onClick={() => navigate(`/home/${id}`)} style={{margin: "auto"}} >Volver</button>
-
+    
             {esControlador ? (
-                <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", margin: "auto"}}>
-                    
+                <div style={{display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", margin: "auto"}}>
                     <h1>Bienvenido, controlador</h1>
-                    <MDBCard className='my-5 mx-auto justify-content-center shadow-lg' style={{ backgroundColor: '#d3d3d3' }}>
-                    <MDBCardBody>
-                        <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "space-around" }}>
-                        {empleadosEmpresa.map((empleado, indexEmpleado) => (
+                    {empleadosEmpresa.map((empleado, indexEmpleado) => (
                         <div key={indexEmpleado}>
                             <h2>Nombre del empleado: {empleado.nombreCompleto}</h2>
                             {empleado.horarios.map((horario, indexHorario) => (
-                                <div key={indexHorario}>
-                                    <p> Fecha: {horario.fecha}</p>
-                                    <p> Hora de entrada: {horario.horaEntrada}</p>
-                                    <p> Hora de salida: {horario.horaSalida}</p>
-                                    <p> Tiempo de descanso: {horario.minutosPau} minutos</p>
-                                    <p> Horas trabajadas: {horario.minutosTot / 60} horas</p>
-                                </div>
+                                <MDBCard key={indexHorario} className='my-5 justify-content-center shadow-lg' style={{width:"250px", backgroundColor: '#d3d3d3' }}>
+                                <MDBCardBody>
+                                    <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center" }}>
+                                        <p> Fecha: {horario.fecha}</p>
+                                        <p> Hora de entrada: {horario.horaEntrada}</p>
+                                        <p> Hora de salida: {horario.horaSalida}</p>
+                                        <p> Tiempo de descanso: {horario.minutosPau} minutos</p>
+                                        <p> Horas trabajadas: {horario.minutosTot / 60} horas</p>
+                                    </div>
+                                </MDBCardBody>
+                                </MDBCard>
                             ))}
                         </div>
-                        ))}
-                        </div>
-                    </MDBCardBody>
-                    </MDBCard>
-
+                    ))}
                 </div>
             ) : (
                 <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", margin: "auto"}}>
                     
                     <h1>Buenas, {trabajadorList[id-1].nombreCompleto}. Estos son tus horarios</h1>
-                    <MDBCard className='my-5 mx-auto justify-content-center shadow-lg' style={{ backgroundColor: '#d3d3d3' }}>
-                    <MDBCardBody>
-                        <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "space-around" }}>
-                            {trabajadorList[id - 1].horarios.map((horario, index) => (
-                                <div key={index}>
-                                    <p> Fecha: {horario.fecha}</p>
-                                    <p> Hora de entrada: {horario.horaEntrada}</p>
-                                    <p> Hora de salida: {horario.horaSalida}</p>
-                                    <p> Tiempo de descanso: {horario.minutosPau} minutos</p>
-                                    <p> Horas trabajadas: {horario.minutosTot / 60} horas</p>
-                                </div>
-                            ))}
-                        </div>
-                    </MDBCardBody>
-                    </MDBCard>
-                    
+                    {trabajadorList[id - 1].horarios.map((horario, index) => (
+                        <MDBCard key={index} className='my-5 mx-auto justify-content-center shadow-lg' style={{ backgroundColor: '#d3d3d3' }}>
+                        <MDBCardBody>
+                            <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center" }}>
+                                <p> Fecha: {horario.fecha}</p>
+                                <p> Hora de entrada: {horario.horaEntrada}</p>
+                                <p> Hora de salida: {horario.horaSalida}</p>
+                                <p> Tiempo de descanso: {horario.minutosPau} minutos</p>
+                                <p> Horas trabajadas: {horario.minutosTot / 60} horas</p>
+                            </div>
+                        </MDBCardBody>
+                        </MDBCard>
+                    ))}
                 </div>
             )}
         </div>
+        </Container>
     );
 }
 
