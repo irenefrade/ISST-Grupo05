@@ -1,5 +1,5 @@
 import { Row } from "react-bootstrap";
-import logo_factor_rh from '../../assets/logo_factor_rh.png';
+import logo_factor_rh from '../../assets/logo.jpg';
  
 
 const Header = (props) => {
@@ -8,7 +8,7 @@ const Header = (props) => {
 
     <div id="cabecera" style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center", margin: "auto" }}>
       <Row>
-        <img className="logo" style={{ display: "flex", justifyContent: "left", alignContent: "centre", height: "100px", width: "100px" }} src={process.env.PUBLIC_URL + "logo_factor_rh.png"} alt="logo" />
+      <img className="logo" src={logo} style={{ display: "flex", justifyContent: "right", alignContent: "centre", height: "100px", width: "220px" }}  onClick={handleIMG} alt="logo" />
 
       </Row>
     </div>)

@@ -232,7 +232,7 @@ const HorariosEmpleados = (props) => {
             {empleado.horarios.map((horario, index) => (
                 <Col  key={index}>
                 <div className="my-1">
-                    <Card>
+                    <Card className='my-5 mx-auto justify-content-center shadow-lg' style={{ backgroundColor: '#d3d3d3' }}>
                     <Card.Body>
                         <div class="row">
                             <div className="d-flex justify-content-center align-items-center mb-2">

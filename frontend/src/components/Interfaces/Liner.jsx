@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
-import logo from './../../assets/Frame 1.svg';
+import logo from './../../assets/logo.jpg';
 import { Link, Navigate  } from 'react-router-dom';
 
 
@@ -19,7 +19,7 @@ const Liner = (props) => {
     return (
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center", margin: "auto" }}>
             <Row>   
-                <img className="logo" src={logo} style={{ display: "flex", justifyContent: "right", alignContent: "centre", height: "100px", width: "120px" }}  onClick={handleIMG} alt="logo" />
+                <img className="logo" src={logo} style={{ display: "flex", justifyContent: "right", alignContent: "centre", height: "100px", width: "220px" }}  onClick={handleIMG} alt="logo" />
                 <button className="btn btn-primary" style={{ margin: 25, height: 50, width: 250 }} onClick={handleHorarios}>Control de horarios</button>
                
             </Row>

@@ -75,7 +75,7 @@ function App() {
         <LoginContext.Provider value={[userLogged, setUserLogged]}> 
         <LoginContextEmpresa.Provider value={[empresaLogged, setEmpresaLogged]}> 
             <div style={{
-                backgroundColor: '#F5FFFA',
+                backgroundColor: '#FFFFFF',
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: "cover",      
                 height:"88vh"}}>
