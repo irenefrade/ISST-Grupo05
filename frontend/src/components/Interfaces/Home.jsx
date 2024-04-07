@@ -53,28 +53,38 @@ const Home = (props) => {
             </div>
             <h1 style={{ textAlign: "center" }}>Perfil de {trabajadorList[id-1].nombreCompleto}</h1>
         
-            <div style={{ display: "flex", flexDirection: "row", justifyContent: "flex-start", alignContent: "space-around", margin: "auto" }}>
+            
             <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "space-around", marginRight: "2vh" }}>
-                {trabajadorList[id-1].esControlador ? (
-                    <button className="btn btn-primary" style={{ height: "10vh", width: "20vw", marginBottom: "1vh", marginTop: "2vh" }} onClick={handleHorarios}>Control de horarios de empleados</button>
-                ) : (
-                    <button className="btn btn-primary" style={{ height: "10vh", width: "20vw", marginBottom: "1vh", marginTop: "2vh" }} onClick={handleHorarios}>Registrar mi horario</button>
-                )}
-            </div>
+                
+           
               <MDBCard  className='my-5 mx-auto justify-content-center shadow-lg' style={{ backgroundColor: '#d3d3d3' }}>
               <MDBCardBody>
                 <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "space-around" }}>
                     <h6 style={{ textAlign: "left", width: "50vw", marginLeft: "10vh" }}>Nombre: {trabajadorList[id-1].nombreCompleto} </h6>
                     <h6 style={{ textAlign: "left", width: "50vw", marginLeft: "10vh" }}>
-                    Controlador: {trabajadorList[id-1].esControlador ? 'Sí' : 'No'}
-                    </h6>
+                    Controlador: {trabajadorList[id-1].esControlador ? 'Sí' : 'No'}</h6>
+                    <h6 style={{ textAlign: "left", width: "50vw", marginLeft: "10vh" }}>Correo: {trabajadorList[id-1].correoElectronico} </h6>
+                    <h6 style={{ textAlign: "left", width: "50vw", marginLeft: "10vh" }}>Empresa: {trabajadorList[id-1].nombreEmpresa} </h6>
+                    <h6 style={{ textAlign: "left", width: "50vw", marginLeft: "10vh" }}>Puesto: {trabajadorList[id-1].puesto} </h6>
 
-                  
                 </div>
                 </MDBCardBody>
               </MDBCard>
+              <MDBCard  className='mx-auto' >
+                <MDBCardBody>
+                    <div style={{ display: "centre", flexDirection: "column", justifyContent: "center", alignContent: "center" }}>
+
+                    {trabajadorList[id-1].esControlador ? (
+                            <button className="btn btn-primary" style={{ height: "10vh", width: "20vw", marginBottom: "1vh", marginTop: "2vh" ,backgroundColor: "#696969" }} onClick={handleHorarios}>Control de horarios de empleados</button>
+                        ) : (
+                            <button className="btn btn-primary" style={{ height: "10vh", width: "20vw", marginBottom: "1vh", marginTop: "2vh",backgroundColor: "#696969" }} onClick={handleHorarios}>Registrar mi horario</button>
+                        )}
+                    </div>
+                    </MDBCardBody>
+                </MDBCard>
+                 </div>
             </div>
-            </div>
+            
             :
             <Navigate to={`/`}/>
         }
