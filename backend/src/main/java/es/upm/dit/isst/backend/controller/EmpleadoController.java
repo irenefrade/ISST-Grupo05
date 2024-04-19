@@ -49,6 +49,13 @@ public class EmpleadoController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/empleados/{id}")
+    ResponseEntity<EMPLEADO> read(@PathVariable long id) {
+        Optional<EMPLEADO> empleado = empleadoRepository.findById(id);
+        return empleado.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("/empleados/{id}")
     ResponseEntity<EMPLEADO> update(@RequestBody EMPLEADO newEmpleado, @PathVariable long id) {
         return empleadoRepository.findById(id).map(empleado -> {
