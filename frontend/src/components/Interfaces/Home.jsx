@@ -18,6 +18,11 @@ const Home = (props) => {
         navigate(`/horarios/${id}`);
     }
 
+    const handleAusencias = () => {
+        navigate(`/ausencias/${id}`);
+    }
+
+
 
     const logout = () => {
         setUserLogged()
@@ -52,6 +57,9 @@ const Home = (props) => {
                     <h6 style={{ textAlign: "left", width: "50vw", marginLeft: "10vh" }}>Nombre: {trabajadorList[id-1].nombreCompleto} </h6>
                     <h6 style={{ textAlign: "left", width: "50vw", marginLeft: "10vh" }}>
                     Controlador: {trabajadorList[id-1].esControlador ? 'Sí' : 'No'}</h6>
+                    <h6 style={{ textAlign: "left", width: "50vw", marginLeft: "10vh" }}>
+                    Responsable RRHH: {trabajadorList[id-1].esResponsable ? 'Sí' : 'No'}</h6>
+
                     <h6 style={{ textAlign: "left", width: "50vw", marginLeft: "10vh" }}>Correo: {trabajadorList[id-1].correoElectronico} </h6>
                     <h6 style={{ textAlign: "left", width: "50vw", marginLeft: "10vh" }}>Empresa: {trabajadorList[id-1].nombreEmpresa} </h6>
                     <h6 style={{ textAlign: "left", width: "50vw", marginLeft: "10vh" }}>Puesto: {trabajadorList[id-1].puesto} </h6>
@@ -69,7 +77,18 @@ const Home = (props) => {
                             <button className="btn btn-primary" style={{ height: "10vh", width: "20vw", marginBottom: "1vh", marginTop: "2vh",backgroundColor: "#696969" }} onClick={handleHorarios}>Registrar mi horario</button>
                         )}
                     </div>
-                    </MDBCardBody>
+                </MDBCardBody>
+
+                <MDBCardBody>
+                    <div style={{ display: "centre", flexDirection: "column", justifyContent: "center", alignContent: "center" }}>
+
+                    {trabajadorList[id-1].esResponsable ? (
+                            <button className="btn btn-primary" style={{ height: "10vh", width: "20vw", marginBottom: "1vh", marginTop: "2vh" ,backgroundColor: "#696969" }} onClick={handleAusencias}>Gestión de ausencias de empleados</button>
+                        ) : (
+                            <button className="btn btn-primary" style={{ height: "10vh", width: "20vw", marginBottom: "1vh", marginTop: "2vh",backgroundColor: "#696969" }} onClick={handleAusencias}>Controlar mis ausencias</button>
+                        )}
+                    </div>
+                </MDBCardBody>
                 </MDBCard>
                  </div>
             </div>
