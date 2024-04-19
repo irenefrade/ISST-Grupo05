@@ -75,7 +75,7 @@ const LoginEmpresa = (props) => {
                   </button>
                 </form>
                 <hr className="my-4" />
-                <h6 style={{ textAlign: "center" }}>¿Eres un empleado? pincha <Link to="/">aquí</Link></h6>
+                <h6 style={{ textAlign: "center" }}>¿Eres un empleado? Pincha <Link to="/">aquí</Link></h6>
                 {error && <div style={{ textAlign: "center" }}>{error}</div>}
               </MDBCardBody>
             </MDBCard>

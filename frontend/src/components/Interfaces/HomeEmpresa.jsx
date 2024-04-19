@@ -9,24 +9,68 @@ const HomeEmpresa = (props) => {
     const navigate = useNavigate();
 
     const trabajadorList = props.empleados2;
-    const [checkSubscription, setCheckSubscription] = useState(false)
+    const [checkSubscription, setCheckSubscription] = useState(false);
+    
+    const [estadoSuscripcion, setEstadoSuscripcion] = useState(null);
 
     const [userLogged, setUserLogged] = useContext(LoginContext);
     const { empresaId } = useParams();
+    const estaSuscrito = null;
+
+    //hacer getSuscripcion del usuario actual al backend 
+    useEffect(() => {
+        const getSuscripcion = async () => {
+            try {
+                const response = await fetch(`http://localhost:8080/empleados/${empresaId}`);
+                const data = await response.json();
+                const estaSuscrito = data.suscripcionEmpresa;
+                setEstadoSuscripcion(estaSuscrito); // Almacena el estado de la suscripción en estadoSuscripcion
+            } catch (error) {
+                console.error(error);
+            }
+        };
+    
+        getSuscripcion();
+    }, [empresaId]);
 
 
-   
      
-    //let estaSuscrito = usuarioCorrecto.suscripcionEmpresa;
+    const gestionarSuscripcion = async(bool) => {
+        const response = await fetch(`http://localhost:8080/empleados/${empresaId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                
+                nombreCompleto: trabajadorList[empresaId-1].nombreCompleto,
+                numeroTelefono: trabajadorList[empresaId-1].numeroTelefono,
+                correoElectronico: trabajadorList[empresaId-1].correoElectronico,
+                password: trabajadorList[empresaId-1].password,
+                departamento: trabajadorList[empresaId-1].departamento,
+                puesto: trabajadorList[empresaId-1].puesto,
+                esControlador: trabajadorList[empresaId-1].esControlador,
+                esResponsable: trabajadorList[empresaId-1].esResponsable,
+                nombreEmpresa: trabajadorList[empresaId-1].nombreEmpresa,
+                suscripcionEmpresa: bool,
+                passwordEmpresa: trabajadorList[empresaId-1].passwordEmpresa,
+                empresaId: empresaId
+                
+                
+            })
+        });
+        const data = await response.json();
+        console.log(data);
+        
 
+
+    }
 
     const logout = () => {
         setUserLogged()
     }
 
-    useEffect(() =>{
-        console.log(userLogged)
-    }, [userLogged]);
+    
 
     return (
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "flex-start", alignContent: "center", margin: "auto" }}>
@@ -40,14 +84,22 @@ const HomeEmpresa = (props) => {
                 
                 <h1 style={{ textAlign: "center" }}>Bienvenida empresa, {trabajadorList[empresaId-1].nombreEmpresa}</h1>
                 
-                <button className='btn btn-primary' style={{ margin: "5vh" ,backgroundColor: "#696969"}} onClick={() => {setCheckSubscription(true)}}>Gestionar Suscripción</button>
+                <button className='btn btn-primary' style={{ margin: "5vh" ,backgroundColor: "#696969"}} onClick={() => {setCheckSubscription(true)}}>Ver estado de mi suscripción</button>
                 {checkSubscription ?
                     <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center", margin: "auto" }}>
-                        <h2 style={{ textAlign: "center" }}>Estado de la suscripción: {trabajadorList[empresaId-1].suscripcionEmpresa ? "Estás suscrito" : "No estás suscrito"}</h2>
+                        <h2 style={{ textAlign: "center" }}>Estado de la suscripción: {estadoSuscripcion ? "Estás suscrito" : "No estás suscrito"}</h2>
+                        <div>
+                            {estadoSuscripcion ? (
+                                <button className='btn btn-danger' style={{ margin: "5vh"}} onClick={() => gestionarSuscripcion(false)}>Cancelar Suscripción</button>
+                            ) : (
+                                <button className='btn btn-success' style={{ margin: "5vh"}} onClick={() => gestionarSuscripcion(true)}>Suscribirse</button>
+                            )}
+                        </div>                        
                         <h3 style={{ textAlign: "center", marginTop: "3vh" }}></h3>
                         <button className='btn btn-danger' style={{margin: "4vh"}} onClick={() => {setCheckSubscription(false)}}>Cerrar</button>
                     </div>
-                : null
+                : 
+                null
                 }
             </div>
             </MDBCardBody>
