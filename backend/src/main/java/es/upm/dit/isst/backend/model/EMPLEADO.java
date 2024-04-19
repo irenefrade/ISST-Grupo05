@@ -19,7 +19,8 @@ public class EMPLEADO {
     private String password;
     private String departamento;
     private String puesto;
-    private Boolean EsControlador;
+    private Boolean esControlador;
+    private Boolean esResponsable;
     private String nombreEmpresa;
     private Boolean suscripcionEmpresa;
     private String passwordEmpresa;
@@ -29,6 +30,10 @@ public class EMPLEADO {
     @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<HORARIOS> horarios;
+    
+    @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<AUSENCIAS> ausencias;
     //@ManyToOne
     //@JoinColumn(name = "empresa_id")
     //@JsonBackReference
@@ -40,22 +45,30 @@ public class EMPLEADO {
     }
 
     // Constructor con todos los campos
-    public EMPLEADO(Long id, String nombreCompleto, String numeroTelefono, String correoElectronico, String password,
-    String departamento, String puesto, Boolean esControlador, String nombreEmpresa,
-    Boolean suscripcionEmpresa, String passwordEmpresa, Long empresaId) {
-    this.id = id;
-    this.nombreCompleto = nombreCompleto;
-    this.numeroTelefono = numeroTelefono;
-    this.correoElectronico = correoElectronico;
-    this.password = password;
-    this.departamento = departamento;
-    this.puesto = puesto;
-    this.EsControlador = esControlador;
-    this.nombreEmpresa = nombreEmpresa;
-    this.suscripcionEmpresa = suscripcionEmpresa;
-    this.passwordEmpresa = passwordEmpresa;
-    this.empresaId = empresaId;
+    
+    public EMPLEADO(String nombreCompleto, String numeroTelefono, String correoElectronico, String password, String departamento, String puesto, Boolean esControlador, Boolean esResponsable, String nombreEmpresa, Boolean suscripcionEmpresa, String passwordEmpresa, Long empresaId) {
+        this.nombreCompleto = nombreCompleto;
+        this.numeroTelefono = numeroTelefono;
+        this.correoElectronico = correoElectronico;
+        this.password = password;
+        this.departamento = departamento;
+        this.puesto = puesto;
+        this.esControlador = esControlador;
+        this.esResponsable = esResponsable;
+        this.nombreEmpresa = nombreEmpresa;
+        this.suscripcionEmpresa = suscripcionEmpresa;
+        this.passwordEmpresa = passwordEmpresa;
+        this.empresaId = empresaId;
     }
+
+    public Boolean getEsResponsable() {
+        return esResponsable;
+    }
+
+    public void setEsResponsable(Boolean esResponsable) {
+        this.esResponsable = esResponsable;
+    }
+
     public Long getId() {
         return this.id;
     }
@@ -115,11 +128,11 @@ public class EMPLEADO {
     }
 
     public Boolean getEsControlador(){
-        return this.EsControlador;
+        return this.esControlador;
     }
 
-    public void setEsControlador(Boolean EsControlador){
-        this.EsControlador = EsControlador; 
+    public void setEsControlador(Boolean esControlador){
+        this.esControlador = esControlador; 
     }
 
     public List<HORARIOS> getHorarios() {
@@ -128,6 +141,14 @@ public class EMPLEADO {
 
     public void setHorarios(List<HORARIOS> horarios) {
         this.horarios = horarios;
+    }
+
+    public List<AUSENCIAS> getAusencias() {
+        return this.ausencias;
+    }
+
+    public void setAusencias(List<AUSENCIAS> ausencias) {
+        this.ausencias = ausencias;
     }
 
     public String getNombreEmpresa() {
