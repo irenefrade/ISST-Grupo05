@@ -10,15 +10,14 @@ import java.time.*;
 
 @Entity
 public class HORARIOS {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private LocalDate fecha; 
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
+    private LocalDate dia;
     private LocalTime horaEntrada;
     private LocalTime horaSalida;
     private Long minutosTot;
     private Long minutosExt;
     private Long minutosPau;
+    private boolean jornada; //True mañana False tarde y tirando
 
     @ManyToOne
     @JoinColumn(name = "empleado_id")
@@ -29,10 +28,11 @@ public class HORARIOS {
     public HORARIOS() {
     }
 
-    public HORARIOS(LocalDate fecha, LocalTime horaEntrada, LocalTime horaSalida, Long minutosPau, EMPLEADO empleado) {
-        this.fecha = fecha;
+    public HORARIOS(LocalDate dia, LocalTime horaEntrada, LocalTime horaSalida, Long minutosPau, boolean jornada, EMPLEADO empleado) {
+        this.dia = dia;
         this.horaEntrada = horaEntrada;
         this.horaSalida = horaSalida;
+        this.jornada = jornada;
         this.empleado = empleado;
         this.minutosPau = minutosPau;
         this.minutosTot = Duration.between(horaEntrada, horaSalida).toMinutes()- minutosPau;
@@ -48,11 +48,11 @@ public class HORARIOS {
 	}
 
 	public LocalDate getFecha() {
-		return this.fecha;
+		return this.dia;
 	}
 
 	public void setFecha(LocalDate fecha) {
-		this.fecha = fecha;
+		this.dia = fecha;
 	}
 
 	public LocalTime getHoraEntrada() {
@@ -95,6 +95,9 @@ public class HORARIOS {
         this.minutosPau = minutosPau;
     }
 
+    public boolean getJornada(){ return this.jornada; }
+
+    public void setJornada(boolean jornada) { this.jornada = jornada; }
 
 	public EMPLEADO getEmpleado() {
 		return this.empleado;
