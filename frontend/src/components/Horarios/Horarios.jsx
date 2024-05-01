@@ -14,16 +14,16 @@ const Horarios = (props) => {
     const { id } = useParams();
     const trabajadorList = props.empleados2;
     const esControlador = trabajadorList[id-1].esControlador;
-    const [horariosList, setHorariosList] = useState(null);
+    const [horariosList, setHorariosList] = useState(null); //esta linea no la tiene
 
     useEffect(() =>{
         console.log(esControlador)
-    }, [esControlador]);
+    }, [esControlador]); //hay más cosas en el useEffect
 
     const empleadosEmpresa = trabajadorList.filter((trabajador) => trabajador.nombreEmpresa === trabajadorList[id-1].nombreEmpresa && trabajador.esControlador === false);
 
         
-
+    //Habría que meter el módifica horario?
 
     
 
@@ -43,10 +43,12 @@ const Horarios = (props) => {
                                 <MDBCardBody>
                                     <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center" }}>
                                         <p> Fecha: {horario.fecha}</p>
+                                        <p> Jornada: {horario.jornada ? "mañana" : "tarde"}</p>
                                         <p> Hora de entrada: {horario.horaEntrada}</p>
                                         <p> Hora de salida: {horario.horaSalida}</p>
                                         <p> Tiempo de descanso: {horario.minutosPau} minutos</p>
-                                        <p> Horas trabajadas: {horario.minutosTot / 60} horas</p>
+                                        <p> Tiempo extra: {horario.minutosExt}</p>
+                                        <p> Horas trabajadas: {Math.floor(horario.minutosTot / 60)} horas y {horario.minutosTot % 60} minutos</p>
                                     </div>
                                 </MDBCardBody>
                                 </MDBCard>
@@ -62,15 +64,23 @@ const Horarios = (props) => {
                         <MDBCard key={index} className='my-5 mx-auto justify-content-center shadow-lg' style={{ backgroundColor: '#d3d3d3' }}>
                         <MDBCardBody>
                             <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center" }}>
-                                <p> Fecha: {horario.fecha}</p>
-                                <p> Hora de entrada: {horario.horaEntrada}</p>
-                                <p> Hora de salida: {horario.horaSalida}</p>
-                                <p> Tiempo de descanso: {horario.minutosPau} minutos</p>
-                                <p> Horas trabajadas: {horario.minutosTot / 60} horas</p>
+                                        <p> Fecha: {horario.fecha}</p>
+                                        <p> Jornada: {horario.jornada ? "mañana" : "tarde"}</p>
+                                        <p> Hora de entrada: {horario.horaEntrada}</p>
+                                        <p> Hora de salida: {horario.horaSalida}</p>
+                                        <p> Tiempo de descanso: {horario.minutosPau} minutos</p>
+                                        <p> Tiempo extra: {horario.minutosExt}</p>
+                                        <p> Horas trabajadas: {Math.floor(horario.minutosTot / 60)} horas y {horario.minutosTot % 60} minutos</p>
                             </div>
                         </MDBCardBody>
                         </MDBCard>
                     ))}
+
+                    //esto tiene que ir a horarios?
+                    <Link to={`/horarios/${id}/new`}>
+                        <button className="btn btn-primary">Fichar</button>
+                    </Link>
+
                 </div>
             )}
         </div>
@@ -80,3 +90,6 @@ const Horarios = (props) => {
 
 
 export default Horarios;
+
+
+// a lo mejor en vez de tener todos los parámetros podemos tener hora entrada, hora salida, minutos pausa y que el extra y trabajados se calculen la verdad y que la jornada sea parte del empleado
