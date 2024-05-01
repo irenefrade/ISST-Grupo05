@@ -3,6 +3,7 @@ import { Route, Routes, Redirect, useParams} from 'react-router-dom';
 import './App.css';
 import PrivateRoute from './PrivateRoute'
 import Horarios from './components/Horarios/Horarios';
+import FormHorario from './components/Horarios/FormHorario';
 import Ausencias from './components/Ausencias/Ausencias';
 import FormAusencia from './components/Ausencias/FormAusencia';
 import Login from './components/Interfaces/Login';
@@ -77,6 +78,7 @@ function App() {
                             <Route path="/home/:id" element={<Home empleados2={empleados2}/>}></Route>
                             <Route path="/homeempresa/:empresaId" element={<HomeEmpresa empleados2={empleados2}/>}></Route>
                             <Route path="/horarios/:id" element={<Horarios empleados2={empleados2}/>} />
+                            <Route path="/horarios/:id/new" element={<FormHorario empleados2={empleados2}/>} />
                             <Route path="/ausencias/:id/" element={<Ausencias empleados2={empleados2}/>} />
                             <Route path="/ausencias/:id/new" element={<FormAusencia empleados2={empleados2}/>} />
                             
