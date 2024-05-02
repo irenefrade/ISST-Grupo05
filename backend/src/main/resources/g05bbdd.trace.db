@@ -1,17 +1,21 @@
-2024-04-06 13:50:28.955917+02:00 jdbc[13]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "EMPRESA" no encontrada
-Table "EMPRESA" not found; SQL statement:
-SELECT * FROM EMPRESA [42102-224]
-2024-04-06 16:30:22.736806+02:00 jdbc[13]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "SELECT * FROM\000d\000a[*]10 HORARIOS"; se esperaba "identifier"
-Syntax error in SQL statement "SELECT * FROM\000d\000a[*]10 HORARIOS"; expected "identifier"; SQL statement:
-SELECT * FROM
-10 HORARIOS [42001-224]
-2024-04-06 16:31:20.996981+02:00 jdbc[13]: exception
-org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "'' (HORARIOS: ""MINUTOS_EXT"" BIGINT)"
-Data conversion error converting "'' (HORARIOS: ""MINUTOS_EXT"" BIGINT)"; SQL statement:
-UPDATE "PUBLIC"."HORARIOS" SET "ID"=? ,"FECHA"=? ,"HORA_ENTRADA"=? ,"HORA_SALIDA"=? ,"MINUTOS_EXT"=? ,"MINUTOS_PAU"=? ,"MINUTOS_TOT"=? ,"EMPLEADO_ID"=?  WHERE "ID"=? [22018-224]
-2024-04-06 16:31:20.997230+02:00 jdbc[13]: exception
-org.h2.jdbc.JdbcSQLDataException: Conversión de datos fallida, convirtiendo "'' (HORARIOS: ""MINUTOS_EXT"" BIGINT)"
-Data conversion error converting "'' (HORARIOS: ""MINUTOS_EXT"" BIGINT)"; SQL statement:
-UPDATE "PUBLIC"."HORARIOS" SET "ID"=? ,"FECHA"=? ,"HORA_ENTRADA"=? ,"HORA_SALIDA"=? ,"MINUTOS_EXT"=? ,"MINUTOS_PAU"=? ,"MINUTOS_TOT"=? ,"EMPLEADO_ID"=?  WHERE "ID"=? [22018-224]
+2024-04-30 11:42:19.614581+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "'a' (EMPLEADO: ""EMPRESA_ID"" BIGINT)"; SQL statement:
+INSERT INTO "PUBLIC"."EMPLEADO"("ID","CORREO_ELECTRONICO","DEPARTAMENTO","EMPRESA_ID","ES_CONTROLADOR","ES_RESPONSABLE","NOMBRE_COMPLETO","NOMBRE_EMPRESA","NUMERO_TELEFONO","PASSWORD","PASSWORD_EMPRESA","PUESTO","SUSCRIPCION_EMPRESA")VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?) [22018-224]
+2024-04-30 11:42:19.614581+02:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "'a' (EMPLEADO: ""EMPRESA_ID"" BIGINT)"; SQL statement:
+INSERT INTO "PUBLIC"."EMPLEADO"("ID","CORREO_ELECTRONICO","DEPARTAMENTO","EMPRESA_ID","ES_CONTROLADOR","ES_RESPONSABLE","NOMBRE_COMPLETO","NOMBRE_EMPRESA","NUMERO_TELEFONO","PASSWORD","PASSWORD_EMPRESA","PUESTO","SUSCRIPCION_EMPRESA")VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?) [22018-224]
+2024-04-30 11:47:41.815606+02:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM HORARIOS [*]AND AUSENCIAS"; SQL statement:
+SELECT * FROM HORARIOS AND AUSENCIAS [42000-224]
+2024-04-30 11:48:36.623509+02:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "U&'ma\\00f1ana' (HORARIOS: ""JORNADA"" BOOLEAN NOT NULL)"; SQL statement:
+INSERT INTO "PUBLIC"."HORARIOS"("ID","DIA","HORA_ENTRADA","HORA_SALIDA","JORNADA","MINUTOS_EXT","MINUTOS_PAU","MINUTOS_TOT","EMPLEADO_ID")VALUES(?,?,?,?,?,?,?,?,?) [22018-224]
+2024-04-30 11:48:36.623509+02:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "U&'ma\\00f1ana' (HORARIOS: ""JORNADA"" BOOLEAN NOT NULL)"; SQL statement:
+INSERT INTO "PUBLIC"."HORARIOS"("ID","DIA","HORA_ENTRADA","HORA_SALIDA","JORNADA","MINUTOS_EXT","MINUTOS_PAU","MINUTOS_TOT","EMPLEADO_ID")VALUES(?,?,?,?,?,?,?,?,?) [22018-224]
+2024-05-01 11:04:51.425169+02:00 jdbc[15]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HORARIO" not found; SQL statement:
+SELECT * FROM HORARIO [42102-224]
+2024-05-01 11:04:52.497897+02:00 jdbc[15]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HORARIO" not found; SQL statement:
+SELECT * FROM HORARIO [42102-224]

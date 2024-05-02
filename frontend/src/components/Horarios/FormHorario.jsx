@@ -63,14 +63,20 @@ const FormHorarios = () => {
                             <br></br>
                             <form style={{display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center" }}>
                                 <div>
+                                <p style={{fontSize: 18}}>Fecha</p>
                                 <MDBInput wrapperClass='mb-4 w-100' placeholder='Fecha inicio' id='fechaInicio' value={fechaInicio} onChange={(event) => setFechaInicio(event.target.value)} type='date'/>
+                                <p style={{fontSize: 18}}>Hora de entrada</p>
                                 <MDBInput wrapperClass='mb-4 w-100' placeholder='Horario entrada' id='entrada' value={entrada} onChange={(event) => setEntrada(event.target.value)} type='time'/>
-                                <MDBInput wrapperClass='mb-4 w-100' placeholder='Pausa' id='pausa' value={pausa} onChange={(event) => setPausa(event.target.value)} type='double'/> 
+                                <p style={{fontSize: 18}}>Tiempo de descanso</p>
+                                <MDBInput wrapperClass='mb-4 w-100' placeholder='Pausa en minutos' id='pausa' value={pausa} onChange={(event) => setPausa(event.target.value)} type='double'/> 
+                                <p style={{fontSize: 18}}>Hora de salida</p>
                                 <MDBInput wrapperClass='mb-4 w-100' placeholder='Horario salida' id='salida' value={salida} onChange={(event) => setSalida(event.target.value)} type='time'/>
                                 <MDBCheckbox labelClass="mr-3" label='Horario tarde (marcar en caso de ser horario de tarde)' id='checkAusencia' value={!jornada} onChange={(event) => setJornada(!event.target.checked)}/>  
                                 </div>
                             </form>
                             <button type="submit" className="btn btn-primary" onClick={handlePublicarHorario}>Guardar jornada</button>
+                            <button className="btn btn-link" onClick={() => navigate(`/horarios/${id}`)}>Cerrar</button>
+                            
 
                         </MDBCardBody>
                         </MDBCard>

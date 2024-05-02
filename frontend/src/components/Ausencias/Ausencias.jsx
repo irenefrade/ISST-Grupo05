@@ -29,10 +29,10 @@ const Ausencias = (props) => {
 
 
     //funcion para modificar el estado de la peticion de ausencia
-    const modificarAusencia = async (empleadoId, fechaInicio, estado) => {
+    const modificarAusencia = async (empleadoId, motivo, estado) => {
         
         const ausenciasEmpleado = empleadosEmpresa.find(empleado => empleado.id === empleadoId).ausencias;
-        const ausencia = ausenciasEmpleado.find(ausencia => ausencia.fechaInicio === fechaInicio);
+        const ausencia = ausenciasEmpleado.find(ausencia => ausencia.motivo === motivo);
         const idAusencia = ausencia.id;
 
 
@@ -43,12 +43,12 @@ const Ausencias = (props) => {
             },
             body: JSON.stringify({
                 
-                fechaInicio: fechaInicio,
+                fechaInicio: ausencia.fechaInicio,
                 fechaFin: ausencia.fechaFin,
                 esAusencia: ausencia.esAusencia,
                 esVacaciones: ausencia.esVacaciones,
                 esBaja: ausencia.esBaja,
-                motivo: ausencia.motivo,
+                motivo: motivo,
                 estado: estado,
                 empleado: { id: empleadoId }
                 
@@ -72,7 +72,8 @@ const Ausencias = (props) => {
                     {empleadosEmpresa.map((empleado, indexEmpleado) => (
                         <div key={indexEmpleado}>
                             <h2>Nombre del empleado: {empleado.nombreCompleto}</h2>
-                            {empleado.ausencias.map((ausencia, indexAusencia) => (
+                            {empleado.ausencias.filter(ausencia => ausencia.estado !== "rechazada").map((ausencia, indexAusencia) => (
+                            
                                 <MDBCard key={indexAusencia} className='my-5 justify-content-center shadow-lg' style={{width:"250px", backgroundColor: '#d3d3d3' }}>
                                 <MDBCardBody>
                                     <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center" }}>
@@ -85,8 +86,8 @@ const Ausencias = (props) => {
                                         }</p>
                                         <p> Motivo: {ausencia.motivo} </p>
                                         <p> Estado: {ausencia.estado} </p>
-                                        <button className="btn btn-primary" onClick={() => modificarAusencia(empleado.id, ausencia.fechaInicio, "aceptada")}>Aceptar</button>
-                                        <button className="btn btn-primary" onClick={() => modificarAusencia(empleado.id, ausencia.fechaInicio, "rechazada")}>Rechazar</button>
+                                        <button className="btn btn-primary" onClick={() => modificarAusencia(empleado.id, ausencia.motivo, "aceptada")}>Aceptar</button>
+                                        <button className="btn btn-primary" onClick={() => modificarAusencia(empleado.id, ausencia.motivo, "rechazada")}>Rechazar</button>
 
 
                                     </div>

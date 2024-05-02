@@ -43,6 +43,10 @@ function App() {
    
         };
         fetchData();
+
+        const intervalId = setInterval(fetchData, 500);
+
+        return () => clearInterval(intervalId);
       }, []); 
       
       useEffect(() => {
