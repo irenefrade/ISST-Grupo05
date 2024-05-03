@@ -7,12 +7,28 @@ import { MDBContainer, MDBInput, MDBRow, MDBCol, MDBCard, MDBCardBody } from 'md
 
 const Home = (props) => {
     const navigate = useNavigate();
+    
 
-    const trabajadorList = props.empleados2;
 
     const [userLogged, setUserLogged] = useContext(LoginContext);
     const { id } = useParams();
-    
+
+    useEffect(() =>{
+        console.log(userLogged)
+      }, [userLogged]);
+
+      
+    if (!userLogged) {
+        return <Navigate to="/" />;
+    }
+
+    const trabajadorList = props.empleados2;
+    const trabajador = trabajadorList[id-1];
+
+    if (!trabajador) {
+        return <Navigate to="/" />;
+    }
+
 
     const handleHorarios = () => {
         navigate(`/horarios/${id}`);
@@ -28,10 +44,7 @@ const Home = (props) => {
         setUserLogged()
     }
 
-    useEffect(() =>{
-        console.log(userLogged)
-      }, [userLogged]);
-
+    
     return (
 
  

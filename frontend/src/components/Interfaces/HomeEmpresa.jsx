@@ -2,13 +2,12 @@ import React, {useContext, useEffect, useState} from 'react';
 import './../../App.css';
 import logo from './../../assets/logo.jpg';
 import { LoginContext } from '../../App';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
 import { MDBContainer, MDBInput, MDBRow, MDBCol, MDBCard, MDBCardBody } from 'mdb-react-ui-kit';
 
 const HomeEmpresa = (props) => {
     const navigate = useNavigate();
 
-    const trabajadorList = props.empleados2;
     const [checkSubscription, setCheckSubscription] = useState(false);
     
     const [estadoSuscripcion, setEstadoSuscripcion] = useState(null);
@@ -33,7 +32,16 @@ const HomeEmpresa = (props) => {
         getSuscripcion();
     }, [empresaId]);
 
+    if (!userLogged) {
+        return <Navigate to="/loginempresa" />;
+    }
 
+    const trabajadorList = props.empleados2;
+    const trabajador = trabajadorList[empresaId-1];
+
+    if (!trabajador) {
+        return <Navigate to="/loginempresa" />;
+    }
      
     const gestionarSuscripcion = async(bool) => {
         const response = await fetch(`http://localhost:8080/empleados/${empresaId}`, {
