@@ -1,7 +1,7 @@
 import { MDBCard, MDBCardBody, MDBCheckbox, MDBCol, MDBContainer, MDBInput, MDBRow } from 'mdb-react-ui-kit';
 import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, Navigate} from 'react-router-dom';
 
 
 
@@ -24,6 +24,7 @@ const Horarios = (props) => {
     }, [esControlador]); //hay más cosas en el useEffect
 
     const empleadosEmpresa = trabajadorList.filter((trabajador) => trabajador.nombreEmpresa === trabajadorList[id-1].nombreEmpresa && trabajador.esControlador === false);
+
 
     const handlePublicarHorario = async () => {
 

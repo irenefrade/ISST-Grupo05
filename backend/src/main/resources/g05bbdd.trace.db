@@ -19,3 +19,15 @@ SELECT * FROM HORARIO [42102-224]
 2024-05-01 11:04:52.497897+02:00 jdbc[15]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "HORARIO" not found; SQL statement:
 SELECT * FROM HORARIO [42102-224]
+2024-05-03 22:11:33.902746+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "USERS" no encontrada
+Table "USERS" not found; SQL statement:
+select username,password,enabled from users where username = ? [42102-224]
+2024-05-03 22:11:47.657716+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "USERS" no encontrada
+Table "USERS" not found; SQL statement:
+select username,password,enabled from users where username = ? [42102-224]
+2024-05-03 22:12:54.573392+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "USERS" no encontrada
+Table "USERS" not found; SQL statement:
+select username,password,enabled from users where username = ? [42102-224]
