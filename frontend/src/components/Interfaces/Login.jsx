@@ -12,6 +12,8 @@ const Login = (props) => {
   const [error, setError] = useState('');
   const [userLogged, setUserLogged] = useContext(LoginContext);
   const [isError, setIsError] = useState(false);
+  const [loginAttempts, setLoginAttempts] = useState(0);
+
 
   useEffect(() => {
     console.log("verás esto en el login");
@@ -21,6 +23,29 @@ const Login = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    if (!username || !cont) {
+      setError('Por favor, rellena todos los campos.');
+      setIsError(true);
+      return;
+    }
+
+    const sanitizeInput = (input) => {
+      
+      const sqlString = require('sqlstring');
+      input= sqlString.escape(input);
+      return input.replace(/<[^>]*>?/gm, '');
+    };
+    
+    setUsername(sanitizeInput(username));
+    setCont(sanitizeInput(cont));
+
+
+    if (loginAttempts >= 3) {
+      setError('Demasiados intentos fallidos. Por favor, inténtalo de nuevo más tarde.');
+      setIsError(true);
+      return;
+    }
 
     const esUsuarioCorrecto = trabajadorList.find((trabajadorItem) => {
       return trabajadorItem.correoElectronico === username && trabajadorItem.password === cont;
@@ -32,10 +57,13 @@ const Login = (props) => {
       }
     });
 
+    
+
     if (esUsuarioCorrecto) {
       setUserLogged(JSON.stringify(usuarioCorrecto));
       navigate(`/home/${usuarioCorrecto.id}`);
     } else {
+      setLoginAttempts(prev => prev + 1);
       setError('Credenciales incorrectas');
       setIsError(true);
       setTimeout(() => setIsError(false), 500); // Reiniciamos isError después de 0.5 segundos
@@ -71,6 +99,8 @@ const Login = (props) => {
                     className={`btn btn-primary rounded shadow ${isError ? 'shake' : ''}`}
                     onClick={handleSubmit}
                     style={{ backgroundColor: 'blue', color: 'white' }}
+                    disabled={loginAttempts >= 3} // Deshabilita el botón si se alcanza el límite de intentos
+
                   >
                       Iniciar sesión
                     </button>
