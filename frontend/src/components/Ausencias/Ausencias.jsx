@@ -101,6 +101,9 @@ const Ausencias = (props) => {
                 <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", margin: "auto"}}>
                     
                     <h1>Buenas, {trabajadorList[id-1].nombreCompleto}. Estas son tus ausencias</h1>
+                    <Link to={`/ausencias/${id}/new`}>
+                        <button className="btn btn-primary">Solicitar nueva ausencia</button>
+                    </Link>
                     {trabajadorList[id - 1].ausencias.map((ausencia, index) => (
                         <MDBCard key={index} className='my-5 mx-auto justify-content-center shadow-lg' style={{ backgroundColor: '#d3d3d3' }}>
                         <MDBCardBody>
@@ -120,9 +123,7 @@ const Ausencias = (props) => {
                     ))}
 
                     
-                    <Link to={`/ausencias/${id}/new`}>
-                        <button className="btn btn-primary">Solicitar nueva ausencia</button>
-                    </Link>
+                    
                 </div>
             )}
         </div>

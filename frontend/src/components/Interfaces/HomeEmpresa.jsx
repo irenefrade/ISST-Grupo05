@@ -96,13 +96,7 @@ const HomeEmpresa = (props) => {
                 {checkSubscription ?
                     <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center", margin: "auto" }}>
                         <h2 style={{ textAlign: "center" }}>Estado de la suscripción: {estadoSuscripcion ? "Estás suscrito" : "No estás suscrito"}</h2>
-                        <div>
-                            {estadoSuscripcion ? (
-                                <button className='btn btn-danger' style={{ margin: "5vh"}} onClick={() => gestionarSuscripcion(false)}>Cancelar Suscripción</button>
-                            ) : (
-                                <button className='btn btn-success' style={{ margin: "5vh"}} onClick={() => gestionarSuscripcion(true)}>Suscribirse</button>
-                            )}
-                        </div>                        
+                                          
                         <h3 style={{ textAlign: "center", marginTop: "3vh" }}></h3>
                         <button className='btn btn-danger' style={{margin: "4vh"}} onClick={() => {setCheckSubscription(false)}}>Cerrar</button>
                     </div>
